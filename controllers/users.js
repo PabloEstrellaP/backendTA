@@ -6,7 +6,7 @@ export const getUsers = async (req, res = response) => {
     const users = await Users.find({ isDelete: false })
     return res.status(200).json({
       ok: true,
-      data: users,
+      msg: users,
     })
 
   } catch (error) {
@@ -30,7 +30,7 @@ export const getUserById = async (req, res = response) => {
     }
     return res.status(200).json({
       ok: true,
-      data: user,
+      msg: user,
     })
 
   } catch (error) {

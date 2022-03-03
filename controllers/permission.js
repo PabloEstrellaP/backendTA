@@ -99,8 +99,7 @@ export const deletePermission = async (req, res = response ) => {
   } catch (error) {
     return res.status(400).json({
       ok: false,
-      msg: error,
-      lala: 'ok'
+      msg: error
     })
   }
 }

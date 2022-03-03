@@ -1,14 +1,14 @@
 import pkg from 'mongoose'
 const { Schema, model } = pkg
 
-const permissionScheme = Schema({
+const rolesScheme = Schema({
   name: {
     type: String,
     require: [true, 'Name is require']
   },
-  description: {
-    type: String,
-    require: [true, 'description is require'],
+  permissions: {
+    type: Object,
+    require: [true, 'objects of permissions is require'],
   },
   creationDate: {
     type: Date
@@ -18,10 +18,10 @@ const permissionScheme = Schema({
   }
 })
 
-permissionScheme.methods.toJSON = function () {
+rolesScheme.methods.toJSON = function () {
   const { __v, password, _id, ...user } = this.toObject()
   user.uid = _id
   return user
 }
 
-export default model('Permission', permissionScheme)
+export default model('Role', rolesScheme)

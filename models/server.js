@@ -3,6 +3,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import routerUser from '../routes/user.js'
 import routerPermission from '../routes/permissions.js'
+import routerRoles from '../routes/roles.js'
 import dbConection from '../database/config.js'
 import morgan from 'morgan'
 export class Server {
@@ -12,7 +13,8 @@ export class Server {
 
     this.paths = {
       users: '/api/users',
-      permissions: '/api/permissions'
+      permissions: '/api/permissions',
+      roles: '/api/roles'
     }
 
     this.conectDB()
@@ -40,6 +42,7 @@ export class Server {
   routes () {
     this.app.use(this.paths.users, routerUser)
     this.app.use(this.paths.permissions, routerPermission)
+    this.app.use(this.paths.roles, routerRoles)
   }
 
   async getLocalIp () {

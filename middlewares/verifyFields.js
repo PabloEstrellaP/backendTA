@@ -1,6 +1,6 @@
 import { validationResult } from 'express-validator'
 
-const validarCampos = (req, res, next) => {
+const verifyFields = (req, res, next) => {
   const errores = validationResult(req)
 
   if (!errores.isEmpty()) {
@@ -13,4 +13,4 @@ const validarCampos = (req, res, next) => {
   next()
 }
 
-export default validarCampos
+export default verifyFields

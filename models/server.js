@@ -5,6 +5,7 @@ import routerUser from '../routes/user.js'
 import routerPermission from '../routes/permissions.js'
 import routerRoles from '../routes/roles.js'
 import routerUserAuth from '../routes/userAuth.js'
+import routerAuth from '../routes/auth.js'
 import dbConection from '../database/config.js'
 import morgan from 'morgan'
 export class Server {
@@ -16,7 +17,8 @@ export class Server {
       users: '/api/users',
       permissions: '/api/permissions',
       roles: '/api/roles',
-      userAuth: '/api/userAuth'
+      userAuth: '/api/userAuth',
+      auth: '/api/auth'
     }
 
     this.conectDB()
@@ -46,6 +48,7 @@ export class Server {
     this.app.use(this.paths.permissions, routerPermission)
     this.app.use(this.paths.roles, routerRoles)
     this.app.use(this.paths.userAuth, routerUserAuth)
+    this.app.use(this.paths.auth, routerAuth)
   }
 
   async getLocalIp () {

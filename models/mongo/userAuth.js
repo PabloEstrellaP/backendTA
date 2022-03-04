@@ -33,10 +33,4 @@ const userAuthScheme = Schema({
   }
 })
 
-userAuthScheme.methods.toJSON = function () {
-  const { __v, _id, ...user } = this.toObject()
-  user.uid = _id
-  return user
-}
-
 export default model('UserAuth', userAuthScheme)

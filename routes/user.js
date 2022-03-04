@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { check } from 'express-validator'
 import { getUsers, getUserById, addUser, editUser, deleteUser } from '../controllers/users.js'
 import verifyFields from '../middlewares/verifyFields.js'
+import verifyJWT from '../middlewares/verifyJWT.js'
 
 const verify = [
     check('name', 'name is required').not().isEmpty(),
@@ -13,10 +14,10 @@ const verify = [
 
 const routerUser = Router()
 
-routerUser.get('/', getUsers)
-routerUser.get('/:id', getUserById)
+routerUser.get('/', verifyJWT, getUsers)
+routerUser.get('/:id', verifyJWT, getUserById)
 routerUser.post('/', verify,  addUser)
 routerUser.put('/:id', verify, editUser)
-routerUser.delete('/:id', deleteUser)
+routerUser.delete('/:id', verifyJWT, deleteUser)
 
 export default routerUser

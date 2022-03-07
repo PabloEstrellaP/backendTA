@@ -46,24 +46,24 @@ export const getautomobileById = async (req,res=response)=>{
 export const addautomobile = async (req, res = response)=>{
     try{
         const{ 
-            description,
-            modelo,
-            serieMotor,
-            placas,
-            originalDate,
-            seriado,
-            nombreResponable,
+         description,
+        model,
+        motorSerial,
+        plaque,
+        originalDate,
+        serial,
+        responsableName,
             }=req.body;
 
 
             const newauto =new automobiles({
                 description,
-                modelo,
-                serieMotor,
-                placas,
+                model,
+                motorSerial,
+                plaque,
                 originalDate,
-                seriado,
-                nombreResponable,
+                serial,
+                responsableName,
                 creationDate: new Date().toISOString()
             });
             await newauto.save()
@@ -84,12 +84,12 @@ export const editautomobile = async (req,res=response) =>{
     const {id} =req.params
     const{ 
         description,
-        modelo,
-        serieMotor,
-        placas,
+        model,
+        motorSerial,
+        plaque,
         originalDate,
-        seriado,
-        nombreResponable,
+        serial,
+        responsableName
         }=req.body;
 //agregar algun metodo para que no se puedan duplicar placas y serie-motor
 
@@ -101,7 +101,7 @@ export const editautomobile = async (req,res=response) =>{
             })
         }
 
-        const serieMotorUsed = await automobiles.find({serieMotor, _id:{$ne:id}})
+        const serieMotorUsed = await automobiles.find({motorSerial, _id:{$ne:id}})
         if(serieMotorUsed.length>0){
             return res.status(400).json({
                 ok:false,
@@ -111,12 +111,12 @@ export const editautomobile = async (req,res=response) =>{
 
         const updateauto= await automobiles.findByIdAndUpdate( id)
         updateauto.description=description
-        updateauto.modelo=modelo
-        updateauto.serieMotor=serieMotor
-        updateauto.placas=placas
+        updateauto.model=model
+        updateauto.motorSerial=serieMotor
+        updateauto.plaque=plaque
         updateauto.originalDate=originalDate
-        updateauto.seriado=seriado
-        updateauto.nombreResponable=nombreResponable
+        updateauto.serial=serial
+        updateauto.responsableName=responsableName
         updateauto.updateDate = new Date().toISOString()
 
         await updateauto.save()

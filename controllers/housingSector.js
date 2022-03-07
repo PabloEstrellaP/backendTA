@@ -1,46 +1,46 @@
 import { response } from "express";
 import req from "express/lib/request";
 import res from "express/lib/response";
-import IT from "../models/mongo/IT";
+import housingSector from "../models/mongo/housingSector";
+import { deleteIT } from "./IT.JS";
 
 
-export const getIT = async (req,res=response)=>{
+export const gethousing = async(req,res=response)=>{
     try{
-        const IT=await IT.find({isDelete: false})
+        const housing=await housingSector.find({isDalete: false})
         return res.status(200).json({
             ok:true,
-            msg :IT
+            msg: housing
         })
     }catch(error){
         return res.status(400).json({
             ok:true,
             msg :error
         })
-    }}
-
-
-export const getITBYid = async (req,res=response)=>{
+    }
+}
+export const gethousingBYid = async (req,res=response)=>{
     try{
-        const {id}=req.params
-        const it=await IT.findById(id)
-        if(it.isDalete==true){
+        const{id}=req.params
+        const housing=await housingSector.findById(id)
+        if(housing.isDalete==true){
             return res.status(400).json({
                 ok: false,
-                msg: "IT hasn't been found"
+                msg: "housing hasn't been found"
             })
         }return res.status(200).json({
             ok: true,
-            msg: it,})
-
-    }catch (error) {
+            msg: housing,})
+    }
+    catch (error) {
         return res.status(400).json({
           ok: false,
           msg: error
         })
 
-}}
-
-export const addIT =async(res, req = response)=>{
+}
+}
+export const addhousing=async(res,req=response)=>{
     try{
         const{
             model,
@@ -49,8 +49,7 @@ export const addIT =async(res, req = response)=>{
             serial,
             responsableName
         }=req.body;
-
-        const newIT=new  IT({
+        const newhousing=new  IT({
             model,
             cost,
             description,
@@ -58,20 +57,20 @@ export const addIT =async(res, req = response)=>{
             responsableName,
             creationDate:new Date().toISOString()
         });
-        await newIT.save()
+        await newhousing.save()
         return res.status(200).json({
             ok: true,
-            msg: newIT
+            msg: newhousing
           })
+        
     }catch (error){
         res.status(400).json({
             ok:false,
             msg : error
         })
     }
-
 }
-export const editIT = async (req,res=response)=>{
+export const edithousing = async (req,res=response)=>{
     try{
         const {id}=req.params
         const{
@@ -82,50 +81,52 @@ export const editIT = async (req,res=response)=>{
             responsableName
         }= req.body;
 
-        //agregar algun metodo para que el serial no se repita???(preguntar a tzap)
+         //agregar algun metodo para que el serial no se repita???(preguntar a tzap)
 
-        const updateIT=await IT.findByIdAndUpdate(id)
-        updateIT.model=model
-        updateIT.cost=cost
-        updateIT.description=description
-        updateIT.serial=serial
-        updateIT.responsableName=responsableName
-        updateIT.updateDate=new Date().toISOString()
 
-        await updateIT.save()
+        const updatehousing=await IT.findByIdAndUpdate(id)
+        updatehousing.model=model
+        updatehousing.cost=cost
+        updatehousing.description=description
+        updatehousing.serial=serial
+        updatehousing.responsableName=responsableName
+        updatehousing.updateDate=new Date().toISOString()
+
+
+        await updatehousing.save()
         return res.status(200).json({
             ok:true,
-            msg:updateIT
+            msg:updatehousing
         })
+
     }catch (error) {
         res.status(400).json({
           ok: false,
           msg: error
         })
       }
-    
+   
 }
-export const deleteIT = async (req,res=response)=>{
+export const deletehousing=async(req,res=response)=>{
     try{
         const{id}=req.params
-        const deleteIT=await IT.findByIdAndUpdate(id)
-        if(deleteIT==null){
+        const deletehousing=await housingSector.findByIdAndUpdate(id)
+        if(deletehousing=null){
             return res.status(400).json({
                 ok:false,
-                msg: "IT hasn't been found"})
+                msg: "housing hasn't been found"})
+
         }
-        deleteIT.isDelete=true
+        deletehousing.isDelete=true
         await deleteIT.save()
         return res.status(200).json({
             ok: true,
             msg :'it has ben deleted'
     })
-
-
-} catch (error) {
-    return res.status(400).json({
-      ok: false,
-      msg: error
-    })
-  }
-}
+    }catch (error) {
+        return res.status(400).json({
+          ok: false,
+          msg: error
+        })
+      }
+    }

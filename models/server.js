@@ -8,6 +8,7 @@ import userAuthRouter from '../routes/userAuth.js'
 import authRouter from '../routes/auth.js'
 import automobileRouter from '../routes/automobiles.js'
 import housingSectorRouter from '../routes/housingSector.js'
+import divisionRouter from '../routes/division.js'
 import ITRouter from '../routes/IT.js'
 import dbConection from '../database/config.js'
 import morgan from 'morgan'
@@ -24,7 +25,8 @@ export class Server {
       auth: '/api/auth',
       automobile: '/api/automobile',
       housingSector: '/api/housingSector',
-      it: '/api/it'
+      it: '/api/it',
+      division: '/api/division'
     }
 
     this.conectDB()
@@ -58,6 +60,7 @@ export class Server {
     this.app.use(this.paths.automobile, automobileRouter)
     this.app.use(this.paths.housingSector, housingSectorRouter)
     this.app.use(this.paths.it, ITRouter)
+    this.app.use(this.paths.division, divisionRouter)
   }
 
   async getLocalIp () {

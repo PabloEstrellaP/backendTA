@@ -37,13 +37,13 @@ export const getPermissionById = async (req, res = response) => {
 
 export const addPermission = async (req, res = response ) => {
   try {
-    const { name, description } = req.body;
+    const { name, description } = req.body
 
     const newPermission = new Permissions({
       name, 
       description,
       creationDate: new Date().toISOString()
-    });
+    })
 
     await newPermission.save()
 

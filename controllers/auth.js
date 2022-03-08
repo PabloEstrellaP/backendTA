@@ -49,7 +49,7 @@ export const login = async(req, res = response) => {
 
 export const renovateToken = async(req, res = response) =>{
 
-  const { user, token } = req.body;
+  const { user, token } = req.body
 
   const isRenovated = comprobarJWT(token)
 
@@ -60,7 +60,7 @@ export const renovateToken = async(req, res = response) =>{
     })
   }
 
-  const generateToken = await generarJWT( user.id );
+  const generateToken = await generarJWT( user.id )
 
   return res.status(200).json({
       user,

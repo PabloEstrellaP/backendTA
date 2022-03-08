@@ -69,7 +69,6 @@ export const addAutomobile = async (req, res = response) => {
         })
 
     } catch (error){
-        console.log(error)
         res.status(400).json({
             ok: false,
             msg: error
@@ -107,7 +106,6 @@ export const editAutomobile = async (req, res = response) => {
         })
 
     }catch (error) {
-        console.log(error)
         res.status(400).json({
           ok: false,
           msg: error

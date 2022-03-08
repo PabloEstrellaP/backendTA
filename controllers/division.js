@@ -63,7 +63,6 @@ export const addDivision = async (req, res = response ) => {
     })
 
   } catch (error) {
-    console.log(error)
     res.status(400).json({
       ok: false,
       msg: error

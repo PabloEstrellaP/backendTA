@@ -123,7 +123,6 @@ export const deleteHousingSector = async (req, res = response) => {
             msg :'HousingSector has been deleted'
     })
     }catch (error) {
-        console.log(error)
         return res.status(400).json({
           ok: false,
           msg: error

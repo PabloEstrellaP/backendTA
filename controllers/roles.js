@@ -37,13 +37,13 @@ export const getRoleById = async (req, res = response) => {
 
 export const addRole = async (req, res = response ) => {
   try {
-    const { name, permissions } = req.body;
+    const { name, permissions } = req.body
 
     const newRole = new Roles({
       name, 
       permissions,
       creationDate: new Date().toISOString()
-    });
+    })
 
     await newRole.save()
 

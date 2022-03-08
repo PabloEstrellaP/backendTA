@@ -57,7 +57,7 @@ export const addIT =async(req, res = response) => {
             serial,
             responsableName,
             creationDate:new Date().toISOString()
-        });
+        })
         await newIT.save()
         return res.status(200).json({
             ok: true,
@@ -109,8 +109,9 @@ export const deleteIT = async (req, res = response) => {
         const deleteIT= await IT.findByIdAndUpdate(id)
         if(deleteIT == null){
             return res.status(400).json({
-                ok:false,
-                msg: "IT hasn't been found"})
+                ok: false,
+                msg: "IT hasn't been found"
+            })
         }
         deleteIT.isDelete = true
         await deleteIT.save()

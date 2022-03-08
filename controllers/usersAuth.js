@@ -45,7 +45,7 @@ export const getUserAuthById = async (req, res = response) => {
 
 export const addUserAuth = async (req, res = response ) => {
   try {
-    const { userName, password, rol, personalData } = req.body;
+    const { userName, password, rol, personalData } = req.body
   
     const newUsersAuth = new UsersAuth({
       userName, 
@@ -53,7 +53,7 @@ export const addUserAuth = async (req, res = response ) => {
       rol, 
       personalData, 
       creationDate: new Date().toISOString()
-    });
+    })
 
     const salt = bcryptjs.genSaltSync()
     newUsersAuth.password = bcryptjs.hashSync( password, salt )

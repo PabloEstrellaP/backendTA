@@ -83,6 +83,16 @@ export class Server {
       console.log(' -------------------------------------------------')
       console.log(`|  💻 Server runing on port ${this.port}.                 |`)
       console.log(`|  You can watch here: http://localhost:${this.port}/     |`)
+      console.log('|                   Endpoints                     |')
+      console.log(`|  http://localhost:${this.paths.users}/                   |`)
+      console.log(`|  http://localhost:${this.paths.permissions}/             |`)
+      console.log(`|  http://localhost:${this.paths.roles}/                   |`)
+      console.log(`|  http://localhost:${this.paths.userAuth}/                |`)
+      console.log(`|  http://localhost:${this.paths.auth}/                    |`)
+      console.log(`|  http://localhost:${this.paths.automobile}/              |`)
+      console.log(`|  http://localhost:${this.paths.housingSector}/           |`)
+      console.log(`|  http://localhost:${this.paths.it}/                      |`)
+      console.log(`|  http://localhost:${this.paths.division}/                |`)
     })
 
     // Run local server

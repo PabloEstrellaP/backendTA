@@ -13,17 +13,17 @@ const verify = [
     verifyFields
 ]
 
-const routerUserAuth = Router()
+const userAuthRouter = Router()
 
-routerUserAuth.get('/', verifyJWT, getUsersAuth)
-routerUserAuth.get('/:id', verifyJWT, getUserAuthById)
-routerUserAuth.post('/', verify,  addUserAuth)
-routerUserAuth.put('/:id', [
+userAuthRouter.get('/', verifyJWT, getUsersAuth)
+userAuthRouter.get('/:id', verifyJWT, getUserAuthById)
+userAuthRouter.post('/', verify,  addUserAuth)
+userAuthRouter.put('/:id', [
     verifyJWT,
     check('password', 'password is required').not().isEmpty(),
     check('rol', 'rol is required').not().isEmpty(),
     verifyFields
 ], editUsersAuth)
-routerUserAuth.delete('/:id', verifyJWT, deleteUserAuth)
+userAuthRouter.delete('/:id', verifyJWT, deleteUserAuth)
 
-export default routerUserAuth
+export default userAuthRouter

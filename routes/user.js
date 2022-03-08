@@ -12,12 +12,12 @@ const verify = [
     verifyFields
 ]
 
-const routerUser = Router()
+const userRouter = Router()
 
-routerUser.get('/', verifyJWT, getUsers)
-routerUser.get('/:id', verifyJWT, getUserById)
-routerUser.post('/', verify,  addUser)
-routerUser.put('/:id', verify, editUser)
-routerUser.delete('/:id', verifyJWT, deleteUser)
+userRouter.get('/', verifyJWT, getUsers)
+userRouter.get('/:id', verifyJWT, getUserById)
+userRouter.post('/', verify,  addUser)
+userRouter.put('/:id', verify, editUser)
+userRouter.delete('/:id', verifyJWT, deleteUser)
 
-export default routerUser
+export default userRouter

@@ -11,12 +11,12 @@ const verify = [
     verifyFields
 ]
 
-const routerPermissions = Router()
+const permissionsRouter = Router()
 
-routerPermissions.get('/', verifyJWT, getPermissions)
-routerPermissions.get('/:id', verifyJWT, getPermissionById)
-routerPermissions.post('/', verify,  addPermission)
-routerPermissions.put('/:id', verify, editPermission)
-routerPermissions.delete('/:id', verifyJWT, deletePermission)
+permissionsRouter.get('/', verifyJWT, getPermissions)
+permissionsRouter.get('/:id', verifyJWT, getPermissionById)
+permissionsRouter.post('/', verify,  addPermission)
+permissionsRouter.put('/:id', verify, editPermission)
+permissionsRouter.delete('/:id', verifyJWT, deletePermission)
 
-export default routerPermissions
+export default permissionsRouter

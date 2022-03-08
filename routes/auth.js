@@ -9,14 +9,14 @@ const verify = [
     verifyFields
 ]
 
-const routerUserAuth = Router()
+const userAuthRouter = Router()
 
 
-routerUserAuth.post('/', verify, login)
-routerUserAuth.post('/renovate', [
+userAuthRouter.post('/', verify, login)
+userAuthRouter.post('/renovate', [
     check('user', 'user is required').not().isEmpty(),
     check('token', 'token is required').not().isEmpty(),
     verifyFields
 ], renovateToken)
 
-export default routerUserAuth
+export default userAuthRouter

@@ -14,7 +14,7 @@ import dbConection from '../database/config.js'
 import morgan from 'morgan'
 export class Server {
   constructor () {
-    this.port = process.env.PORT
+    this.port = process.env.PORT | 3000
     this.app = express()
 
     this.paths = {
@@ -78,7 +78,7 @@ export class Server {
 
   listen () {
     console.clear()
-    
+
     this.app.listen(this.port, () => {
       console.log(' -------------------------------------------------')
       console.log(`|  💻 Server runing on port ${this.port}.                 |`)

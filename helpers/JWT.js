@@ -5,7 +5,7 @@ export const generarJWT = (id) => {
   return new Promise((resolve, reject) => {
     const uid = { id }
     jwt.sign(uid, process.env.JWT_KEY, {
-      expiresIn: '24d'
+      expiresIn: '24h'
     }, (err, token) => {
       if (err) {
         reject('No se pudo generar el JWT')

@@ -43,7 +43,7 @@ export const getUserById = async (req, res = response) => {
 
 export const addUser = async (req, res = response ) => {
   try {
-    const { name, lastName, phone, email, address } = req.body;
+    const { name, lastName, phone, email, address } = req.body
 
     const newUser = new Users({
       name, 
@@ -52,7 +52,7 @@ export const addUser = async (req, res = response ) => {
       email, 
       address, 
       creationDate: new Date().toISOString()
-    });
+    })
 
     await newUser.save()
 

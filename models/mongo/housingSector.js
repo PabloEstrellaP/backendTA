@@ -12,8 +12,9 @@ const HousingSectorSchema = Schema({
         type: String,
         require: [true , 'description is requiere']
     },
-    origenalDate: {
+    originalDate: {
         type: Date,
+        require: [true, 'original date is require']
     },
     cost: {
         type: Number,

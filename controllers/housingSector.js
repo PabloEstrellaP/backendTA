@@ -1,36 +1,35 @@
-import { response } from "express";
-import req from "express/lib/request";
-import res from "express/lib/response";
-import housingSector from "../models/mongo/housingSector";
-import { deleteIT } from "./IT.JS";
+import { response } from 'express'
+import HousingSector from "../models/mongo/housingSector.js"
+import { isHousingSectorTaken } from '../helpers/dbValidator.js'
 
 
-export const gethousing = async(req,res=response)=>{
+export const getHousingSector = async (req, res = response) => {
     try{
-        const housing=await housingSector.find({isDalete: false})
+        const housingSector = await HousingSector.find({ isDelete: false })
         return res.status(200).json({
             ok:true,
-            msg: housing
+            msg: housingSector
         })
     }catch(error){
         return res.status(400).json({
-            ok:true,
-            msg :error
+            ok: false,
+            msg: error
         })
     }
 }
-export const gethousingBYid = async (req,res=response)=>{
+export const getHousingSectorById = async (req, res = response) => {
     try{
-        const{id}=req.params
-        const housing=await housingSector.findById(id)
-        if(housing.isDalete==true){
+        const{ id } = req.params
+        const housingSelector = await HousingSector.findById(id)
+        if(housingSelector.isDelete == true){
             return res.status(400).json({
                 ok: false,
-                msg: "housing hasn't been found"
+                msg: "HousingSector hasn't been found"
             })
         }return res.status(200).json({
             ok: true,
-            msg: housing,})
+            msg: housingSelector
+        })
     }
     catch (error) {
         return res.status(400).json({
@@ -38,65 +37,64 @@ export const gethousingBYid = async (req,res=response)=>{
           msg: error
         })
 
+    }
 }
-}
-export const addhousing=async(res,req=response)=>{
+export const addHousingSector = async(req, res = response) => {
     try{
-        const{
-            model,
-            cost,
-            description,
+        const{ cost, description, serial, responsableName, originalDate } = req.body
+        const isTaken = await isHousingSectorTaken(serial, false)
+        if(isTaken){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Serial is used'
+            })
+        }
+        const newHousingSector = new HousingSector({
             serial,
-            responsableName
-        }=req.body;
-        const newhousing=new  IT({
-            model,
-            cost,
             description,
-            serial,
+            originalDate: new Date(originalDate).toISOString(),
+            cost,
             responsableName,
-            creationDate:new Date().toISOString()
-        });
-        await newhousing.save()
+            creationDate: new Date().toISOString()
+        })
+        await newHousingSector.save()
         return res.status(200).json({
             ok: true,
-            msg: newhousing
-          })
+            msg: newHousingSector
+        })
         
     }catch (error){
         res.status(400).json({
-            ok:false,
-            msg : error
+            ok: false,
+            msg: error
         })
     }
 }
-export const edithousing = async (req,res=response)=>{
+export const editHousingSector = async (req, res = response) => {
     try{
-        const {id}=req.params
-        const{
-            model,
-            cost,
-            description,
-            serial,
-            responsableName
-        }= req.body;
+        const  { id } = req.params
+        const{ cost, description, serial, responsableName, originalDate } = req.body
 
-         //agregar algun metodo para que el serial no se repita???(preguntar a tzap)
+        const isTaken = await isHousingSectorTaken(serial, true, id)
+        if(isTaken){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Serial is used'
+            })
+        }
 
+        const updateHousingSector = await HousingSector.findByIdAndUpdate(id)
+        updateHousingSector.cost = cost
+        updateHousingSector.description = description
+        updateHousingSector.serial = serial
+        updateHousingSector.originalDate = new Date(originalDate).toISOString()
+        updateHousingSector.responsableName = responsableName
+        updateHousingSector.updateDate = new Date().toISOString()
 
-        const updatehousing=await IT.findByIdAndUpdate(id)
-        updatehousing.model=model
-        updatehousing.cost=cost
-        updatehousing.description=description
-        updatehousing.serial=serial
-        updatehousing.responsableName=responsableName
-        updatehousing.updateDate=new Date().toISOString()
-
-
-        await updatehousing.save()
+        await updateHousingSector.save()
         return res.status(200).json({
-            ok:true,
-            msg:updatehousing
+            ok: true,
+            msg: updateHousingSector
         })
 
     }catch (error) {
@@ -107,26 +105,28 @@ export const edithousing = async (req,res=response)=>{
       }
    
 }
-export const deletehousing=async(req,res=response)=>{
+export const deleteHousingSector = async (req, res = response) => {
     try{
-        const{id}=req.params
-        const deletehousing=await housingSector.findByIdAndUpdate(id)
-        if(deletehousing=null){
+        const { id } = req.params
+        const housingSector = await HousingSector.findByIdAndUpdate(id)
+        if(housingSector == null){
             return res.status(400).json({
                 ok:false,
-                msg: "housing hasn't been found"})
+                msg: "HousingSector hasn't been found"
+            })
 
         }
-        deletehousing.isDelete=true
-        await deleteIT.save()
+        housingSector.isDelete = true
+        await housingSector.save()
         return res.status(200).json({
             ok: true,
-            msg :'it has ben deleted'
+            msg :'HousingSector has been deleted'
     })
     }catch (error) {
+        console.log(error)
         return res.status(400).json({
           ok: false,
           msg: error
         })
       }
-    }
+}

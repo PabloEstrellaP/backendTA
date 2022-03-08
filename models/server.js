@@ -1,11 +1,14 @@
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import routerUser from '../routes/user.js'
-import routerPermission from '../routes/permissions.js'
-import routerRoles from '../routes/roles.js'
-import routerUserAuth from '../routes/userAuth.js'
-import routerAuth from '../routes/auth.js'
+import userRouter from '../routes/user.js'
+import permissionRouter from '../routes/permissions.js'
+import rolesRouter from '../routes/roles.js'
+import userAuthRouter from '../routes/userAuth.js'
+import authRouter from '../routes/auth.js'
+import automobileRouter from '../routes/automobiles.js'
+import housingSectorRouter from '../routes/housingSector.js'
+import ITRouter from '../routes/IT.js'
 import dbConection from '../database/config.js'
 import morgan from 'morgan'
 export class Server {
@@ -18,7 +21,10 @@ export class Server {
       permissions: '/api/permissions',
       roles: '/api/roles',
       userAuth: '/api/userAuth',
-      auth: '/api/auth'
+      auth: '/api/auth',
+      automobile: '/api/automobile',
+      housingSector: '/api/housingSector',
+      it: '/api/it'
     }
 
     this.conectDB()
@@ -44,11 +50,14 @@ export class Server {
   }
 
   routes () {
-    this.app.use(this.paths.users, routerUser)
-    this.app.use(this.paths.permissions, routerPermission)
-    this.app.use(this.paths.roles, routerRoles)
-    this.app.use(this.paths.userAuth, routerUserAuth)
-    this.app.use(this.paths.auth, routerAuth)
+    this.app.use(this.paths.users, userRouter)
+    this.app.use(this.paths.permissions, permissionRouter)
+    this.app.use(this.paths.roles, rolesRouter)
+    this.app.use(this.paths.userAuth, userAuthRouter)
+    this.app.use(this.paths.auth, authRouter)
+    this.app.use(this.paths.automobile, automobileRouter)
+    this.app.use(this.paths.housingSector, housingSectorRouter)
+    this.app.use(this.paths.it, ITRouter)
   }
 
   async getLocalIp () {

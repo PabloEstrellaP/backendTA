@@ -11,12 +11,12 @@ const verify = [
     verifyFields
 ]
 
-const routerRole = Router()
+const roleRouter = Router()
 
-routerRole.get('/', verifyJWT, getRoles)
-routerRole.get('/:id', verifyJWT, getRoleById)
-routerRole.post('/', verify,  addRole)
-routerRole.put('/:id', verify, editRole)
-routerRole.delete('/:id', verifyJWT, deleteRole)
+roleRouter.get('/', verifyJWT, getRoles)
+roleRouter.get('/:id', verifyJWT, getRoleById)
+roleRouter.post('/', verify,  addRole)
+roleRouter.put('/:id', verify, editRole)
+roleRouter.delete('/:id', verifyJWT, deleteRole)
 
-export default routerRole
+export default roleRouter

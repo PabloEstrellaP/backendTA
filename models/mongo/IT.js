@@ -1,7 +1,7 @@
 import pkg from 'mongoose'
 const{Schema , model}=pkg
 
-const TISchema = Schema({
+const ITSchema = Schema({
 
     model: {
         type: String,
@@ -12,7 +12,7 @@ const TISchema = Schema({
     },
     description: {
         type: String,
-        requiere: [true , 'modelo is requiere']
+        requiere: [true , 'description is requiere']
     },
     serial: {
         type: String,
@@ -35,10 +35,4 @@ const TISchema = Schema({
     }
 })
 
-TISchema.methods.toJSON=function(){
-    const { __v,password, _id, ...TI } = this.toObject()
-    TI.uid = _id
-    return TI
-}
-
-export default model('TI',TISchema)
+export default model('IT',ITSchema)

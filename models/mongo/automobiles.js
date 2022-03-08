@@ -20,7 +20,8 @@ const AutomobileSchema = Schema({
         unique : true
     },
     originalDate: {
-        type : Date
+        type : Date,
+        require: [true, 'original date is require']
     },
     serial: {
         type : String,
@@ -42,11 +43,5 @@ const AutomobileSchema = Schema({
         default: false
     }
 })
-
-AutomobileSchema.methods.toJSON=function () {
-    const{ __v ,password,id, ...automobile} = this.toObject()
-    automobile.uid=__di
-    return automobile
-}
 
 export default model('Automobile',AutomobileSchema)

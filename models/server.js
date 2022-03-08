@@ -78,6 +78,7 @@ export class Server {
 
   listen () {
     console.clear()
+    
     this.app.listen(this.port, () => {
       console.log(' -------------------------------------------------')
       console.log(`|  💻 Server runing on port ${this.port}.                 |`)

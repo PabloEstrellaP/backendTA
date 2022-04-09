@@ -76,13 +76,16 @@ export const addUserAuth = async (req, res = response ) => {
 export const editUsersAuth = async (req, res = response ) => {
   try {
     const { id } = req.params
-    const { password, rol } = req.body
+    const { password, rol, userName } = req.body
 
     const updateUserAuth = await UsersAuth.findByIdAndUpdate( id )
     
     const salt = bcryptjs.genSaltSync()
+    if(password){
+      updateUserAuth.password = bcryptjs.hashSync( password, salt ) 
+    }
     
-    updateUserAuth.password = bcryptjs.hashSync( password, salt ) 
+    updateUserAuth.userName = userName 
     updateUserAuth.rol = rol 
     updateUserAuth.updateDate = new Date().toISOString() 
 

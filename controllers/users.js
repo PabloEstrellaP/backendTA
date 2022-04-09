@@ -44,7 +44,13 @@ export const getUserById = async (req, res = response) => {
 export const addUser = async (req, res = response ) => {
   try {
     const { name, lastName, phone, email, address } = req.body
-
+    const emailIsUsed = await Users.find({ email })
+    if ( emailIsUsed.length > 0 ){
+      return res.status(400).json({
+        ok: false,
+        msg: 'Email is used'
+      })
+    }
     const newUser = new Users({
       name, 
       lastName, 

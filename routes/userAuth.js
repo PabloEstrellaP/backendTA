@@ -5,7 +5,7 @@ import verifyFields from '../middlewares/verifyFields.js'
 import verifyJWT from '../middlewares/verifyJWT.js'
 
 const verify = [
-    verifyJWT,
+    // verifyJWT,
     check('userName', 'userName is required').not().isEmpty(),
     check('password', 'password is required').not().isEmpty(),
     check('rol', 'rol is required').not().isEmpty(),
@@ -20,7 +20,6 @@ userAuthRouter.get('/:id', verifyJWT, getUserAuthById)
 userAuthRouter.post('/', verify,  addUserAuth)
 userAuthRouter.put('/:id', [
     verifyJWT,
-    check('password', 'password is required').not().isEmpty(),
     check('rol', 'rol is required').not().isEmpty(),
     verifyFields
 ], editUsersAuth)

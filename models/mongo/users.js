@@ -18,7 +18,7 @@ const UserScheme = Schema({
     type: String,
     unique: true
   },
-  addres: {
+  address: {
     type: String
   },
   creationDate: {

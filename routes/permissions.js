@@ -13,7 +13,7 @@ const verify = [
 
 const permissionsRouter = Router()
 
-permissionsRouter.get('/', verifyJWT, getPermissions)
+permissionsRouter.get('/', /*verifyJWT,*/ getPermissions)
 permissionsRouter.get('/:id', verifyJWT, getPermissionById)
 permissionsRouter.post('/', verify,  addPermission)
 permissionsRouter.put('/:id', verify, editPermission)

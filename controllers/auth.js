@@ -34,6 +34,7 @@ export const login = async(req, res = response) => {
       const token = await generarJWT( user._id )
 
       return res.status(200).json({
+        ok: true,
         user,
         token
       })
@@ -63,6 +64,7 @@ export const renovateToken = async(req, res = response) =>{
   const generateToken = await generarJWT( user.id )
 
   return res.status(200).json({
+      ok: true,
       user,
       token: generateToken
   })

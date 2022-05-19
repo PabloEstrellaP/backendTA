@@ -3,7 +3,7 @@ import Division from '../models/mongo/division.js'
 
 export const getDivision = async (req, res = response) => {
   try {
-    const divisions = await Division.find({ isDelete: false }).populate('housingSector').populate('IT')
+    const divisions = await Division.find({ isDelete: false }).populate('housingSector').populate('IT').populate('automobile')
     return res.status(200).json({
       ok: true,
       msg: divisions

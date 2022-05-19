@@ -17,7 +17,8 @@ const divisionSchema = Schema({
     require: [true, 'IT is require'],
   },
   automobile: {
-    type: Object
+    type: [Schema.Types.ObjectId],
+    ref: 'Automobile',
   },
   creationDate: {
     type: Date

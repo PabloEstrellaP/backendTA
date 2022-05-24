@@ -30,8 +30,9 @@ export const login = async(req, res = response) => {
               msg: "Credentials aren't corrects"
           })
       }
-
-      const token = await generarJWT( user._id )
+      const id = user._id.toString()
+      const token = await generarJWT( id )
+      console.log(token)
 
       return res.status(200).json({
         ok: true,
@@ -50,7 +51,7 @@ export const login = async(req, res = response) => {
 
 export const renovateToken = async(req, res = response) =>{
 
-  const { user, token } = req.body
+  const { token } = req.body
 
   const isRenovated = comprobarJWT(token)
 
@@ -61,8 +62,8 @@ export const renovateToken = async(req, res = response) =>{
     })
   }
 
+  const user = await UsersAuth.findById(isRenovated[1]).populate('rol').populate('personalData')
   const generateToken = await generarJWT( user.id )
-
   return res.status(200).json({
       ok: true,
       user,

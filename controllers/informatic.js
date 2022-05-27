@@ -1,5 +1,5 @@
 import { response } from 'express'
-import IT from '../models/mongo/it.js'
+import IT from '../models/mongo/informatic.js'
 import { isITTaken } from '../helpers/dbValidator.js'
 
 export const getIT = async (req, res = response) => {

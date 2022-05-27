@@ -1,7 +1,7 @@
 import User from '../models/mongo/users.js'
 import Automobile from '../models/mongo/automobiles.js'
 import HousingSector from '../models/mongo/housingSector.js'
-import IT from '../models/mongo/it.js'
+import IT from '../models/mongo/informatic.js'
 
 export const isEmailTaken = async (email) => {
   const existeEmail = await User.findOne({ email })

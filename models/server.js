@@ -14,7 +14,7 @@ import dbConection from '../database/config.js'
 import morgan from 'morgan'
 export class Server {
   constructor () {
-    this.port = process.env.PORT | 3000
+    this.port = process.env.PORT || 3000
     this.app = express()
 
     this.paths = {

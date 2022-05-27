@@ -9,7 +9,7 @@ import authRouter from '../routes/auth.js'
 import automobileRouter from '../routes/automobiles.js'
 import housingSectorRouter from '../routes/housingSector.js'
 import divisionRouter from '../routes/division.js'
-import ITRouter from '../routes/IT.js'
+import ITRouter from '../routes/IT'
 import dbConection from '../database/config.js'
 import morgan from 'morgan'
 export class Server {

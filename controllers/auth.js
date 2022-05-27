@@ -1,5 +1,5 @@
 import { response } from 'express'
-import  bcryptjs from 'bcryptjs'
+import bcryptjs from 'bcryptjs'
 
 import UsersAuth from '../models/mongo/userAuth.js'
 import { generarJWT, comprobarJWT } from '../helpers/JWT.js'

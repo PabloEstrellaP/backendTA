@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { check } from 'express-validator'
-import { getIT, getITById, addIT, editIT, deleteIT } from '../controllers/IT'
-import verifyFields from '../middlewares/verifyFields'
-import verifyJWT from '../middlewares/verifyJWT'
+import { getIT, getITById, addIT, editIT, deleteIT } from '../controllers/IT.js'
+import verifyFields from '../middlewares/verifyFields.js'
+import verifyJWT from '../middlewares/verifyJWT.js'
 
 const verify = [
   verifyJWT,

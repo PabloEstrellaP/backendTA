@@ -1,5 +1,5 @@
 import { response } from 'express'
-import Permissions from '../models/mongo/permission.js'
+import Permissions from '../models/mongo/permissions.js'
 
 export const getPermissions = async (req, res = response) => {
   try {
